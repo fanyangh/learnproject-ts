@@ -27,7 +27,7 @@ const DB = new Sequelize(
     },
     // logging 为 false 则不显示
     //logging: logger,
-    timezone: mysqlCfg.timezone,
+    // timezone: mysqlCfg.timezone,
     dialectOptions: {
       requestTimeout: 15000
     }

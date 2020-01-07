@@ -1,7 +1,7 @@
 const mysql = {
   dev: {
     "username": "root",
-    "password": "7758",
+    "password": "1029",
     "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql",
