@@ -1,20 +1,8 @@
 export default (sequelize, DataTypes) => {
-  const model = sequelize.define('AdminMenu', {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      comments: '权限名称'
-    }
-  }, {
+  const model = sequelize.define('AdminRoleMap', {}, {
     freezeTableName: true,
     underscoreAll: true,
-    tableName: 'admin_menu',
+    tableName: 'admin_role_map',
     charset: 'utf8',
     initialAutoIncrement: 1,
     timezone: '+08:00',
@@ -25,12 +13,18 @@ export default (sequelize, DataTypes) => {
   // 表间的关系
   model.associate = (models) => {
     // 中间表要点: belongsToMany() 要有as,through里也要as
+    model.belongsTo(models.Admin, {
+      foreignKey: 'adminId'
+    });
+    model.belongsTo(models.AdminRole, {
+      foreignKey: 'adminRoleId'
+    });
   }
   // 类级方法
   // 表的初始化数据
   model.seed = async () => {
     const data = [
-      { name: '添加管理员' }
+      { adminId: 1, adminRoleId: 1 }
     ];
     await model.bulkCreate(data);
   }

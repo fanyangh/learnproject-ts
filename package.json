@@ -7,9 +7,10 @@
     "qingsongyibai-server": "migrate.js"
   },
   "scripts": {
-    "dev": "gulp dev",
-    "test": "gulp test",
-    "publish": "gulp publish",
+    "dev": "gulp local:dev",
+    "test": "gulp local:test",
+    "publish": "online:test",
+    "publisha": "online:production",
     "dist": "gulp dist",
     "doc": "gulp doc",
     "migrate": "node dist/bin/migrate.js"
