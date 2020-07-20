@@ -1,5 +1,5 @@
-import * as _ from 'lodash';
-import models from '../models';
+import * as _ from "lodash";
+import models from "../models";
 /**
  * t/transaction: transaction
  * query: limit/offset/where/order/search
@@ -57,7 +57,7 @@ class BaseBLL {
     if (_.isArray(opts.attributes)) {
       opt.attributes = [];
       const exclude = [];
-      opts.attributes.forEach((attr) => {
+      opts.attributes.forEach(attr => {
         if (/^[!]/.test(attr) && this.attributes.has(attr.substr(1))) {
           exclude.push(attr.substr(1));
         } else if (this.attributes.has(attr)) {
@@ -92,10 +92,13 @@ class BaseBLL {
       // 排序字段验证
       if (_.isArray(opts.query.order)) {
         opt.order = [];
-        opts.query.order.forEach((item) => {
+        opts.query.order.forEach(item => {
           if (_.isString(item)) {
-            const order = item.split('-');
-            if (this.attributes.has(order[0]) && ['DESC', 'ASC'].indexOf(order[1]) !== -1) {
+            const order = item.split("-");
+            if (
+              this.attributes.has(order[0]) &&
+              ["DESC", "ASC"].indexOf(order[1]) !== -1
+            ) {
               opt.order.push(order);
             }
           } else if (_.isArray(item)) {
@@ -134,14 +137,14 @@ class BaseBLL {
   async create(data, t = {}) {
     const res = await this.model.create(data, t);
     return res;
-  };
+  }
   /**
    * 删除数据
    */
   async destroy(opts: Opts) {
     const opt = this._init(opts);
     return await this.model.destroy(opt);
-  };
+  }
   /**
    * 修改记录
    * @param data 数据
@@ -154,7 +157,7 @@ class BaseBLL {
       await res.update(data, opt);
     }
     return res;
-  };
+  }
   /**
    * 获取所有数据(少数情况)
    * @description query包含 limit/offset/where/order
@@ -163,7 +166,7 @@ class BaseBLL {
   async getAll(opts: Opts = {}) {
     const opt = this._init(opts);
     return await this.model.scope(opt.scopes).findAll(opt);
-  };
+  }
   /**
    * 获取分页列表
    * @description query包含 limit/offset/where/order
@@ -172,7 +175,7 @@ class BaseBLL {
   async getList(opts: Opts = {}) {
     const opt = this._init(opts);
     return await this.model.scope(opt.scopes).findAndCountAll(opt);
-  };
+  }
   /**
    * 获取记录详情
    * @param opts [t][scopes][attributes][query]
@@ -180,7 +183,7 @@ class BaseBLL {
   async get(opts: Opts = {}) {
     const opt = this._init(opts);
     return await this.model.scope(opt.scopes).findOne(opt);
-  };
+  }
 }
 
 export default BaseBLL;

@@ -1,29 +1,36 @@
-import { upload } from './configs/upload';
-import { thrower, CustomError, logger, uploader, presenter, i18n } from "./libs";
+import { upload } from "./configs/upload";
+import {
+  thrower,
+  CustomError,
+  logger,
+  uploader,
+  presenter,
+  i18n
+} from "./libs";
 
-const express = require('express');
+const express = require("express");
 const app = express();
-const router = require('./router').router;
-const cors = require('cors');
-const ejs = require('ejs');
-const path = require('path');
-const redis = require('redis');
+const router = require("./router").router;
+const cors = require("cors");
+const ejs = require("ejs");
+const path = require("path");
+const redis = require("redis");
 // const session = require('express-session');
-const bodyParser = require('body-parser');
-const compression = require('compression');
+const bodyParser = require("body-parser");
+const compression = require("compression");
 //const errorLogger = logger('error');
 
 /**
  * Express configuration.
  */
 // 设置模板目录
-app.set('views', path.join(__dirname, 'views'));
+app.set("views", path.join(__dirname, "views"));
 // 设置模板的后缀类型为ejs
 //Server.set('view engine', 'ejs');
 //设置模板的后缀类型
-app.set('view engine', 'html');
+app.set("view engine", "html");
 //设置render时自动添加的后缀
-app.engine('.html', ejs.__express);
+app.engine(".html", ejs.__express);
 //只能设置分割符 新版本没有了
 //ejs.delimiter = '$';
 app.set("port", process.env.port);
@@ -31,7 +38,9 @@ app.use(express.static(path.join(__dirname, "../static")));
 app.use(express.json({ limit: upload.limits.fileSize }));
 app.use(compression());
 app.use(bodyParser.json({ limit: upload.limits.fileSize }));
-app.use(bodyParser.urlencoded({ limit: upload.limits.fileSize, extended: true }));
+app.use(
+  bodyParser.urlencoded({ limit: upload.limits.fileSize, extended: true })
+);
 app.use(cors());
 // i18n
 app.use(i18n.init);
@@ -59,13 +68,15 @@ app.use(uploader);
 // });
 
 // 5.添加自定义响应方法(自动处理json:status与result)
-app.use(presenter({
-  page: 'page',
-  limit: 'limit',
-  order: 'order',
-  defaultLang: 'zh-cn',
-  customDir: '../errors'
-}));
+app.use(
+  presenter({
+    page: "page",
+    limit: "limit",
+    order: "order",
+    defaultLang: "zh-cn",
+    customDir: "../errors"
+  })
+);
 
 /**
  * 所有业务API路由接口
@@ -73,7 +84,7 @@ app.use(presenter({
 router(app);
 
 // 7.error异常处理
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   if (err instanceof CustomError) {
     // 自定义错误
     res.customError(err);
@@ -82,18 +93,18 @@ app.use(function (err, req, res, next) {
     res.validateError(err);
   } else if (err) {
     // 内部服务器错误
-    err.module = 'common';
-    err.type = 'unknown';
+    err.module = "common";
+    err.type = "unknown";
     res.customError(err);
   }
 });
 
 // 8.404
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   if (!res.headersSent) {
     const err: any = new Error();
-    err.module = 'common';
-    err.type = 'notFound';
+    err.module = "common";
+    err.type = "notFound";
     err.message = req.originalUrl;
     res.customError(err);
   }

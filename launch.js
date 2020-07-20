@@ -9,7 +9,7 @@ process.on('unhandledRejection', (reason) => {
   console.error(reason, 'unhandledRejection');
 });
 // 3.启动服务器
-const app = require('./dist/app');
+const app = require('./dist/src/app');
 
 app.listen(app.get('port'), () => {
   console.log(('  App is running at http://127.0.0.1:%d in >> %s << mode'), app.get('port'), app.get('env'));

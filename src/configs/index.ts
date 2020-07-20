@@ -16,17 +16,17 @@
 
 // export default configs;
 
-import { auth } from './auth';
-import { email } from './email';
-import { env } from './env';
-import { log } from './log';
-import { mysql } from './mysql';
-import { redis } from './redis';
-import { system } from './system';
-import { txCos } from './txCos';
-import { upload } from './upload';
-import { version } from './version';
-import { aliSms } from './aliSms';
+import { auth } from "./auth";
+import { email } from "./email";
+import { env } from "./env";
+import { log } from "./log";
+import { mysql } from "./mysql";
+import { redis } from "./redis";
+import { system } from "./system";
+import { txCos } from "./txCos";
+import { upload } from "./upload";
+import { version } from "./version";
+import { aliSms } from "./aliSms";
 
 export {
   auth,
@@ -40,4 +40,4 @@ export {
   upload,
   version,
   aliSms
-}
+};

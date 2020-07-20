@@ -28,7 +28,7 @@
   "less.lint.hexColorLength": "ignore",
   "projectManager.sortList": "Name",
   "workbench.iconTheme": "vscode-icons",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 4,
   "typescript.check.npmIsInstalled": false,
   "vsicons.dontShowNewVersionMessage": true,
   "todohighlight.isEnable": true,

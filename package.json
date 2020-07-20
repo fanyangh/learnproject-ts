@@ -13,7 +13,7 @@
     "publisha": "online:production",
     "dist": "gulp dist",
     "doc": "gulp doc",
-    "migrate": "node dist/bin/migrate.js"
+    "migrate": "node dist/src/bin/migrate.js"
   },
   "apidoc": {
     "name": "qingsongyibai",

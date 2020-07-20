@@ -53,7 +53,7 @@ gulp.task('dist', ['clean'], async () => {
 
 // 本地发布(dev/test两种)
 var localPublish = (mode) => {
-  const env = require('./dist/configs/env').env[mode];
+  const env = require('./dist/src/configs/env').env[mode];
   env.NODE_ENV = mode;
   var stream = nodemon({
     script: './launch.js',
@@ -79,7 +79,7 @@ var localPublish = (mode) => {
 };
 // 线上发布(test/production两种)
 var onlinePublish = (mode) => {
-  const env = require('./dist/configs/env').env[mode];
+  const env = require('./dist/src/configs/env').env[mode];
   env.NODE_ENV = mode;
   var pmList = () => {
     return new Promise((resolve, reject) => {
