@@ -5,7 +5,7 @@ const mysql = {
     host: "10.172.246.200",
     port: 6703,
     dialect: "mysql",
-    database: "test",
+    database: "project_template",
     timezone: "+08:00",
     pool: {
       max: 200,

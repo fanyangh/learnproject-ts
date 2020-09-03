@@ -76,37 +76,37 @@ class BaseBLL {
     }
     // id或paging()生成的query有limit where offset order
     // order排序
-    if (_.isObject(opts.query)) {
-      // req.paging()生成的多余的
-      delete opts.query.page;
-      // 合并内层和外层的where
-      if (_.isObject(opts.query.where)) {
-        _.assign(opt.where, opts.query.where);
-        delete opts.query.where;
-      }
-      // 指定列与排除列
-      _.assign(opt, opts.query);
-      if (_.isString(opts.query.order)) {
-        opts.query.order = [opts.query.order];
-      }
-      // 排序字段验证
-      if (_.isArray(opts.query.order)) {
-        opt.order = [];
-        opts.query.order.forEach(item => {
-          if (_.isString(item)) {
-            const order = item.split("-");
-            if (
-              this.attributes.has(order[0]) &&
-              ["DESC", "ASC"].indexOf(order[1]) !== -1
-            ) {
-              opt.order.push(order);
-            }
-          } else if (_.isArray(item)) {
-            opt.order.push(item);
-          }
-        });
-      }
-    }
+    // if (_.isObject(opts.query)) {
+    //   // req.paging()生成的多余的
+    //   delete opts.query.page;
+    //   // 合并内层和外层的where
+    //   if (_.isObject(opts.query.where)) {
+    //     _.assign(opt.where, opts.query.where);
+    //     delete opts.query.where;
+    //   }
+    //   // 指定列与排除列
+    //   _.assign(opt, opts.query);
+    //   if (_.isString(opts.query.order)) {
+    //     opts.query.order = [opts.query.order];
+    //   }
+    //   // 排序字段验证
+    //   if (_.isArray(opts.query.order)) {
+    //     opt.order = [];
+    //     opts.query.order.forEach(item => {
+    //       if (_.isString(item)) {
+    //         const order = item.split("-");
+    //         if (
+    //           this.attributes.has(order[0]) &&
+    //           ["DESC", "ASC"].indexOf(order[1]) !== -1
+    //         ) {
+    //           opt.order.push(order);
+    //         }
+    //       } else if (_.isArray(item)) {
+    //         opt.order.push(item);
+    //       }
+    //     });
+    //   }
+    // }
     return opt;
   }
   /**

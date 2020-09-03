@@ -1,8 +1,8 @@
-import * as  fs from 'fs';
-import * as  path from 'path';
-import * as  Sequelize from 'sequelize';
-import { mysql } from '../configs';
-import { loader } from '../libs';
+import * as fs from "fs";
+import * as path from "path";
+import * as Sequelize from "sequelize";
+import { mysql } from "../configs";
+import { loader } from "../libs";
 
 const MODE = process.env.NODE_ENV;
 // TODO:日志模块
@@ -34,16 +34,16 @@ const DB = new Sequelize(
   }
 );
 
-const handler = (info) => {
+const handler = info => {
   if (__filename !== info.fullpath) {
     let fn = require(info.fullpath).default;
     let model = fn(DB, Sequelize);
-    model.getAttributes = function () {
+    model.getAttributes = function() {
       return Object.keys(this.attributes);
-    }
+    };
     models[model.name] = model;
   }
-}
+};
 
 loader(handler, {
   dir: __dirname,
@@ -51,10 +51,10 @@ loader(handler, {
 });
 // 添加约束
 for (let k in models) {
-  if (typeof models[k] === 'function') {
+  if (typeof models[k] === "function") {
     models[k].associate(models);
   }
-};
+}
 
 models.sequelize = DB;
 models.Op = DB.Op;

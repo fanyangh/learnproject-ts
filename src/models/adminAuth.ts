@@ -1,33 +1,37 @@
 export default (sequelize, DataTypes) => {
-  const model = sequelize.define('AdminAuth', {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
+  const model = sequelize.define(
+    "AdminAuth",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+      },
+      adminId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      authId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
     },
-    adminId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    authId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
-  }, {
+    {
       freezeTableName: false,
       underscoredAll: true,
-      tableName: 'admin_auth',
-      charset: 'utf8',
+      tableName: "admin_auth",
+      charset: "utf8",
       initialAutoIncrement: 1,
-      timezone: '+08:00',
+      timezone: "+08:00",
       paranoid: false,
       timestamps: false,
       indexes: []
-    });
+    }
+  );
   // class method
   // 表间的关系
-  model.associate = (models) => {
+  model.associate = models => {
     // model.belongsTo(models.Admin, {
     //   targetKey: 'id',
     //   foreignKey: 'adminId'
@@ -36,7 +40,7 @@ export default (sequelize, DataTypes) => {
     //   targetKey: 'id',
     //   foreignKey: 'authId'
     // });
-  }
+  };
   // 表的初始化数据
   model.seed = async () => {
     const data = [
@@ -46,8 +50,8 @@ export default (sequelize, DataTypes) => {
       { adminId: 1, authId: 4 }
     ];
     await model.bulkCreate(data);
-  }
+  };
   // instance method
 
   return model;
-}
+};

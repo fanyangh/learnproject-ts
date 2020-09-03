@@ -12,12 +12,9 @@
 // );
 // export { BLL };
 
-import BaseBLL from './BaseBLL';
-import UserBLL from './UserBLL';
-export {
-  BaseBLL,
-  UserBLL
-}
+import BaseBLL from "./BaseBLL";
+import UserBLL from "./UserBLL";
+export { BaseBLL, UserBLL };
 
 // global.$BLLs = {
 //   BaseBLL,
